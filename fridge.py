@@ -23,7 +23,22 @@ items = list(collection.find())
 if 'df' not in st.session_state:
     st.session_state.df = load_items()  # Load items initially
 
-# # Selection 
+# Sidebar
+st.sidebar.subheader("Choose an operation")
+option = st.sidebar.selectbox(label="", label_visibility="collapsed", options=("Query", "Add item", "Delete item"))
+
+# Display respective form based on the selection
+if option == "Query":
+    query = query_form()
+    display_df(query)
+elif option == "Add item":
+    add_item_form()
+    display_df()
+elif option == "Delete item":
+    delete_item_form(st.session_state.df, collection)
+    display_df()
+
+# # Selection (NOT USED)
 # selected_indices = add_checkbox_column(st.session_state.df)
 # if selected_indices:
 #     selected_items = st.session_state.df.iloc[selected_indices].copy()
@@ -49,18 +64,3 @@ if 'df' not in st.session_state:
 
 # st.expander("Options")
 # delete_item_form(selected_items, collection)
-
-# Sidebar
-st.sidebar.subheader("Choose an operation")
-option = st.sidebar.selectbox(label="", label_visibility="collapsed", options=("Query", "Add item", "Delete item"))
-
-# Display respective form based on the selection
-if option == "Query":
-    query = query_form()
-    display_df(query)
-elif option == "Add item":
-    add_item_form()
-    display_df()
-elif option == "Delete item":
-    delete_item_form(st.session_state.df, collection)
-    display_df()

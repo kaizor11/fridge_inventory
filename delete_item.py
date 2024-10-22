@@ -28,7 +28,7 @@ def delete_item_form(df, collection):
                     df.reset_index(drop=True, inplace=True)
 
                 else:
-                    st.error("One or more indices are invalid")
+                    st.error("Out of range")
 
             except ValueError:
                 st.error("Please enter valid integer indices")

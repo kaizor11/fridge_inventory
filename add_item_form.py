@@ -5,6 +5,7 @@ from db_connection import get_db_connection
 def add_item_form():
     st.sidebar.subheader("Add Item")
     with st.sidebar.form(key='add_item_form'):
+        # widgets 
         item = st.text_input("Item Name")
         storage = st.selectbox("Stored in", ["Fridge", "Freezer"])
         quantity = st.number_input("Quantity", min_value=1)
@@ -13,6 +14,7 @@ def add_item_form():
         expiration_date = st.date_input("Expiration Date")
         other = st.text_input("Other details")
 
+        # submission
         submit_button = st.form_submit_button(label="Add item")
         if submit_button:
             db = get_db_connection()
@@ -27,4 +29,3 @@ def add_item_form():
                 'expiration_date': expiration_date_str, 
                 'other': other})
             st.sidebar.success(f"Added {item}")
-            # st.experimental_rerun()  # Rerun the app to refresh the table

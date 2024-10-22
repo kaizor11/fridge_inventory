@@ -31,8 +31,7 @@ def display_df(query=None):
     })
     st.dataframe(df_display, use_container_width=True)
 
-
-# Checkbox column for options
+# Checkbox column for options (NOT USED)
 def add_checkbox_column(df):
     selected_indices = []  # List to hold the indices of selected items
     for i in range(len(df)):
