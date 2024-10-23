@@ -18,18 +18,22 @@ def load_items(query=None):
 
 def display_df(query=None):
     df = load_items(query)
-    column_order = ["item", "storage", "quantity", "brand", "bought_from", "expiration_date", "other"]
-    df_display = df[column_order]
-    df_display = df_display.rename(columns={
-        "item": "Item",
-        "storage": "Storage",
-        "quantity": "Quantity",
-        "brand": "Brand",
-        "bought_from": "Bought From",
-        "expiration_date": "Expiration Date",
-        "other": "Other (size, container, etc)",
-    })
-    st.dataframe(df_display, use_container_width=True)
+    if not df.empty:
+        column_order = ["item", "storage", "quantity", "brand", "bought_from", "expiration_date", "other"]
+        df_display = df.reindex(columns=column_order)
+        df_display = df_display.rename(columns={
+            "item": "Item",
+            "storage": "Storage",
+            "quantity": "Quantity",
+            "brand": "Brand",
+            "bought_from": "Bought From",
+            "expiration_date": "Expiration Date",
+            "other": "Other (size, container, etc)",
+        })
+        st.dataframe(df_display, use_container_width=True)
+    else:
+        st.error("No matching data")
+        
 
 # Checkbox column for options (NOT USED)
 def add_checkbox_column(df):

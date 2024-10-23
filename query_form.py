@@ -54,4 +54,5 @@ def query_form():
         submit_button = st.form_submit_button(label="Search")
         
         if submit_button:
+            print(query)
             return query

@@ -11,7 +11,7 @@ def add_item_form():
         quantity = st.number_input("Quantity", min_value=1)
         brand = st.text_input("Brand")
         bought_from = st.selectbox("Bought from", ["Costco", "Weee!/99 Ranch", "Ralph's/Trader Joe's, etc", "Other"])
-        expiration_date = st.date_input("Expiration Date")
+        expiration_date = st.date_input("Expiration Date", value=None)
         other = st.text_input("Other details")
 
         # submission
@@ -20,12 +20,15 @@ def add_item_form():
             db = get_db_connection()
             collection = db["Freezer"]
             expiration_date_str = expiration_date.isoformat() if expiration_date else None
-            collection.insert_one({
-                'item': item, 
-                'storage': storage, 
-                'quantity': quantity, 
-                'brand': brand, 
-                'bought_from': bought_from,
-                'expiration_date': expiration_date_str, 
-                'other': other})
-            st.sidebar.success(f"Added {item}")
+            if item: 
+                collection.insert_one({
+                    'item': item, 
+                    'storage': storage, 
+                    'quantity': quantity, 
+                    'brand': brand, 
+                    'bought_from': bought_from,
+                    'expiration_date': expiration_date_str, 
+                    'other': other})
+                st.sidebar.success(f"Added {item}")
+            else:
+                st.error("Please specify item name")
