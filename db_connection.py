@@ -9,7 +9,7 @@ def get_db_connection():
     uri = st.secrets["MONGODB_URI"]
 
     # Create a new client and connect to the server
-    client = MongoClient(uri)
+    client = MongoClient(uri, serverSelectionTimeoutMS=5000)
 
     # # Send a ping to confirm a successful connection
     # try:
