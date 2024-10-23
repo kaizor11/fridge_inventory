@@ -6,7 +6,7 @@ import streamlit as st
 
 def get_db_connection():
     # load_dotenv()
-    uri = st.secrets["mongo"]["uri"]
+    uri = st.secrets["MONGODB_URI"]
 
     # Create a new client and connect to the server
     client = MongoClient(uri)
