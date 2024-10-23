@@ -35,7 +35,7 @@ elif option == "Add item":
     add_item_form()
     display_df()
 elif option == "Delete item":
-    delete_item_form(st.session_state.df, collection)
+    delete_item_form(collection)
     display_df()
 
 # # Selection (NOT USED)
